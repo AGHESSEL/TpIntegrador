@@ -1,3 +1,6 @@
+string cadenaConexion=(@"");
+        List<Viaje> lv = new List<Viaje>();
+
 public Form1()
         {
             InitializeComponent();
