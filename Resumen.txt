@@ -1,0 +1,51 @@
+class Viaje
+
+elementos y properties
+public Producto()
+public Producuto(parametros)
+public override string ToString()
+public void cargarProducto(string cadenaConexion)
+public void actualizarProducto(string cadenaConexion)
+public void borrarProducto(string cadenaConexion)
+
+
+class AccesoDatos (using system.data y data.oledb)
+elementos y properties
+public AccesoDatos()
+public AccesoDatos(string cadenaConexion)
+public void conectar()
+public void desconectar()
+public void leerTabla(string nombreTabla)
+public DataTable consultarTabla(string nombreTrabla)
+
+
+public partial class Form1 : Form
+string cadenaConexion=(@"");
+List<Producto> lp = new List<Producto>();
+ private void Form1_Load
+	{
+		cargarLista(lstname, "nombre de la tabla");
+		cargarCombo(cboname, "nombre de la tabla");
+		habilitar(false);
+		txt.codigo.enabled = false
+	}
+public void cargarLista(listbox lista, string nombreTabla)
+	{
+		while
+	}
+public void cargarCombo(combobox combo, string nombreTabla)
+
+public void cargarCampos(int posicion)
+	{
+		if
+	}
+private void habilitar(bool x)
+private void existe(int pk)
+	{
+		for
+	}
+private void limpiar()
+evento closing()
+evento lstname_selectedindexChanged()
+botones
+restricciones
