@@ -1,0 +1,61 @@
+class AccesoDatos
+    {
+        OleDbCommand comando;
+        OleDbConnection conexion;
+        OleDbDataReader lector;
+        DataTable tabla;
+        string cadenaConexion;
+
+        public OleDbDataReader pLector { get => lector; set => lector = value; }
+        public string pCadenaConexion { get => cadenaConexion; set => cadenaConexion = value; }
+        public OleDbCommand pComando { get => comando; set => comando = value; }
+
+        public AccesoDatos()
+        {
+            comando = new OleDbCommand();
+            conexion = new OleDbConnection();
+            lector = null;
+            tabla = new DataTable();
+            cadenaConexion = "";
+        }
+
+        public AccesoDatos(string cadenaConexion)
+        {
+            comando = new OleDbCommand();
+            conexion = new OleDbConnection();
+            lector = null;
+            tabla = new DataTable();
+            this.cadenaConexion = cadenaConexion;
+        }
+
+        public void conectar()
+        {
+            conexion.ConnectionString = cadenaConexion;
+            conexion.Open();
+            comando.Connection = conexion;
+            comando.CommandType = CommandType.Text;
+        }
+
+        public void desconectar()
+        {
+            conexion.Close();
+            conexion.Dispose();
+        }
+
+        public DataTable consultarTabla(string nombreTabla)
+        {
+            tabla = new DataTable();
+            conectar();
+            comando.CommandText = "select * from " + nombreTabla;
+            tabla.Load(comando.ExecuteReader());
+            desconectar();
+            return tabla;
+        }
+
+        public void leerTabla(string nombreTabla)
+        {
+            conectar();
+            comando.CommandText = "select * from " + nombreTabla;
+            lector = comando.ExecuteReader();
+        }
+    }

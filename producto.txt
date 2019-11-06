@@ -1,0 +1,64 @@
+class Viaje
+    {
+        int codigo, transporte, tipo;
+        string destino;
+        DateTime fecha;
+
+        public int pCodigo { get => codigo; set => codigo = value; }
+        public int pTransporte { get => transporte; set => transporte = value; }
+        public int pTipo { get => tipo; set => tipo = value; }
+        public string pDestino { get => destino; set => destino = value; }
+        public DateTime pFecha { get => fecha; set => fecha = value; }
+
+        public Viaje()
+        {
+            this.codigo = 0;
+            this.transporte = 0;
+            this.tipo = 0;
+            this.destino = "";
+            this.fecha = DateTime.Today;
+        }
+
+        public Viaje(int codigo, int transporte, int tipo, string destino, DateTime fecha)
+        {
+            this.codigo = codigo;
+            this.transporte = transporte;
+            this.tipo = tipo;
+            this.destino = destino;
+            this.fecha = fecha;
+        }
+
+        public override string ToString()
+        {
+            return destino + " " +  fecha.ToString();
+        }
+
+        public void cargarViaje(string cadenaConexion)
+        {
+            AccesoDatos datos = new AccesoDatos(cadenaConexion);
+            datos.conectar();
+            datos.pComando.CommandText = "insert into viaje (codigo, destino, transporte, tipo, fecha) values (" +
+                                            pCodigo + ", '" + pDestino + "', " + pTransporte + ", " + pTipo + ", '" + pFecha + "')";
+            datos.pComando.ExecuteNonQuery();
+            datos.desconectar();                            
+        }
+
+        public void actualizarViaje(string cadenaConexion)
+        {
+            AccesoDatos datos = new AccesoDatos(cadenaConexion);
+            datos.conectar();
+            datos.pComando.CommandText = "update viaje set destino = '" + pDestino + "', transporte = " + pTransporte + ", tipo = " + pTipo +
+                                            ", fecha = '" + pFecha + "' where codigo = " + pCodigo;
+            datos.pComando.ExecuteNonQuery();
+            datos.desconectar();
+        }
+
+        public void borrarViaje(string cadenaConexion)
+        {
+            AccesoDatos datos = new AccesoDatos(cadenaConexion);
+            datos.conectar();
+            datos.pComando.CommandText = "delete from viaje where codigo = " + pCodigo;
+            datos.pComando.ExecuteNonQuery();
+            datos.desconectar();
+        }
+    }
